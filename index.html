@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukay-Ukay Thrift | Pre-Loved Style, One-of-a-Kind Finds</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+
+        /* C2: Color palette tokens */
+        @theme {
+            --color-cream: #F8F3EB;
+            --color-brown: #4B3528;
+            --color-caramel: #8A4F2A;
+            --color-caramel-light: #E7B58D;
+            --color-beige: #E7D7C4;
+        }
+
+        /* A5: Reusable component classes */
+        @layer components {
+            .section {
+                @apply px-6 py-20 md:px-12 lg:px-24;
+            }
+
+            .section-title {
+                @apply mb-4 text-3xl font-black md:text-5xl;
+            }
+
+            .product-card {
+                @apply overflow-hidden rounded-2xl border border-beige
+                bg-white p-4 text-brown shadow-sm transition duration-300
+                hover:-translate-y-2 hover:shadow-xl
+                dark:border-slate-700 dark:bg-slate-900 dark:text-cream;
+            }
+
+            .primary-button {
+                @apply inline-block rounded-full bg-brown px-6 py-3
+                font-bold text-white transition hover:bg-caramel
+                dark:bg-caramel dark:hover:bg-caramel-light;
+            }
+
+            .form-input {
+                @apply w-full rounded-xl border border-beige
+                bg-white p-3 text-brown outline-none focus:border-caramel
+                dark:border-slate-700 dark:bg-slate-950 dark:text-cream
+                placeholder:text-slate-500 dark:placeholder:text-slate-400;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #progressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 50%;
+            height: 5px;
+            background: var(--color-caramel);
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-cream text-brown transition-colors duration-300 dark:bg-slate-950 dark:text-cream">
+    <div id="progressBar" aria-hidden="true"></div>
+    <header class="sticky top-0 z-50 border-b border-beige bg-cream/95 text-brown backdrop-blur dark:border-slate-800 dark:bg-slate-950/95 dark:text-cream">
+        <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+            <a href="#hero" class="text-2xl font-black tracking-wide text-brown dark:text-cream">
+                UKAYUKAY <span class="text-caramel dark:text-caramel-light">THRIFT</span>
+            </a>
+            <ul class="flex flex-wrap items-center gap-4 text-sm font-semibold md:gap-7">
+                <li><a class="text-brown hover:text-caramel dark:text-cream dark:hover:text-caramel-light" href="#about">About</a></li>
+                <li><a class="text-brown hover:text-caramel dark:text-cream dark:hover:text-caramel-light" href="#work">Collections</a></li>
+                <li><a class="text-brown hover:text-caramel dark:text-cream dark:hover:text-caramel-light" href="#contact">Contact</a></li>
+            </ul>
+            <button id="darkModeToggle" type="button"
+                class="rounded-full border border-caramel px-4 py-2 text-sm font-bold text-brown hover:bg-beige dark:border-caramel-light dark:text-cream dark:hover:bg-slate-800"
+                aria-pressed="true">
+                ☀️ Light Mode
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section id="hero" class="grid min-h-[75vh] items-center gap-10 bg-cream px-6 py-16 text-brown dark:bg-slate-950 dark:text-cream md:grid-cols-2 md:px-12 lg:px-24">
+            <div>
+                <p class="hero-item mb-4 font-bold uppercase tracking-[0.2em] text-caramel dark:text-caramel-light">
+                    Pre-loved fashion · One-of-a-kind finds
+                </p>
+                <h1 class="hero-item mb-6 text-5xl font-black leading-tight md:text-7xl">
+                    Your Style<br>
+                    <span class="text-caramel dark:text-caramel-light">Your Outfit</span>
+                </h1>
+                <p class="hero-item mb-8 max-w-xl text-lg leading-relaxed text-stone-600 dark:text-stone-300">
+                    Find carefully picked pre-loved pieces, easy on your budget
+                    and full of personality.
+                </p>
+                <div class="hero-item flex flex-wrap gap-4">
+                    <a href="#work" class="primary-button">Explore Collection →</a>
+                </div>
+            </div>
+            <div class="hero-item relative min-h-72 overflow-hidden rounded-[2rem] bg-beige md:min-h-96">
+                <img
+                    class="absolute inset-0 h-full w-full object-cover"
+                    src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
+                    alt="Clothes displayed on racks in a fashion shop"
+                    fetchpriority="high">
+                <div class="absolute inset-x-0 bottom-0 bg-brown/85 px-8 py-6 text-white">
+                    <p class="text-2xl font-black">Good Style. Small Price.</p>
+                    <p class="mt-2">Fashion deserves a second life.</p>
+                </div>
+            </div>
+        </section>
+        <!-- About -->
+        <section id="about" class="reveal section bg-beige text-brown dark:bg-slate-900 dark:text-cream">
+            <div class="mx-auto max-w-5xl text-center">
+                <p class="mb-3 font-bold uppercase tracking-[0.2em] text-caramel dark:text-caramel-light">Our Story</p>
+                <h2 class="section-title">Ukay-Ukay Thrift</h2>
+                <p class="mx-auto max-w-3xl text-lg leading-relaxed">
+                    Ukay-Ukay Thrift gives pre-loved clothing a new chapter. We handpick
+                    affordable, distinctive pieces so you can express your style while
+                    making thoughtful choices about what you wear.
+                </p>
+            </div>
+        </section>
+        <!-- Clothing collections -->
+        <section id="work" class="reveal section bg-cream text-brown dark:bg-slate-950 dark:text-cream">
+            <div class="mx-auto max-w-7xl">
+                <p class="mb-3 font-bold uppercase tracking-[0.2em] text-caramel dark:text-caramel-light">Handpicked for you</p>
+                <h2 class="section-title">Our Collections</h2>
+                <p class="mb-10 text-lg text-brown dark:text-slate-300">
+                    Find everyday favorites across our latest secondhand collections.
+                </p>
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <article class="product-card">
+                        <img
+                            class="h-52 w-full rounded-xl bg-[#eee3d5] object-cover"
+                            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                            alt="Classic casual shirt">
+                        <p class="mt-5 text-sm font-bold uppercase tracking-wider text-caramel dark:text-caramel-light">Collection 01</p>
+                        <h3 class="mt-2 text-xl font-black">Vintage Shirts</h3>
+                        <p class="mt-2 text-brown dark:text-slate-300">Casual and vintage-inspired tops for everyday wear.</p>
+                        <p class="mt-4 font-black">From ₱40</p>
+                    </article>
+                    <article class="product-card">
+                        <img
+                            class="h-52 w-full rounded-xl bg-[#e5e5dc] object-cover"
+                            src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                            alt="Blue denim jeans">
+                        <p class="mt-5 text-sm font-bold uppercase tracking-wider text-caramel dark:text-caramel-light">Collection 02</p>
+                        <h3 class="mt-2 text-xl font-black">Denim & Pants</h3>
+                        <p class="mt-2 text-brown dark:text-slate-300">Pre-loved jeans and pants to complete your outfit.</p>
+                        <p class="mt-4 font-black">From ₱80</p>
+                    </article>
+                    <article class="product-card">
+                        <img
+                            class="h-52 w-full rounded-xl bg-[#e9ded0] object-cover"
+                            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                            alt="Jacket displayed for sale">
+                        <p class="mt-5 text-sm font-bold uppercase tracking-wider text-caramel dark:text-caramel-light">Collection 03</p>
+                        <h3 class="mt-2 text-xl font-black">Jackets & Outerwear</h3>
+                        <p class="mt-2 text-brown dark:text-slate-300">Layer your look with unique secondhand outerwear.</p>
+                        <p class="mt-4 font-black">From ₱120</p>
+                    </article>
+                </div>
+                <p class="mt-6 text-sm text-brown dark:text-slate-400">
+                    Sample categories and prices. Ask us about current availability.
+                </p>
+            </div>
+        </section>
+
+        <!-- Why choose us -->
+        <section class="reveal section bg-brown text-cream dark:bg-brown dark:text-cream">
+            <div class="mx-auto max-w-6xl">
+                <p class="mb-3 font-bold uppercase tracking-[0.2em] text-caramel-light">Why shop with us?</p>
+                <h2 class="section-title">Style More. Spend Less.</h2>
+
+                <div class="mt-10 grid gap-8 md:grid-cols-3">
+                    <article>
+                        <div class="mb-3 text-4xl" aria-hidden="true">💸</div>
+                        <h3 class="mb-2 text-xl font-bold">Easy on Your Budget</h3>
+                        <p class="text-stone-200">Find affordable pieces without overspending.</p>
+                    </article>
+
+                    <article>
+                        <div class="mb-3 text-4xl" aria-hidden="true">✨</div>
+                        <h3 class="mb-2 text-xl font-bold">Unique Finds</h3>
+                        <p class="text-stone-200">Discover different styles and one of a kind pieces.</p>
+                    </article>
+
+                    <article>
+                        <div class="mb-3 text-4xl" aria-hidden="true">♻️</div>
+                        <h3 class="mb-2 text-xl font-bold">Reuse & Restyle</h3>
+                        <p class="text-stone-200">Give pre-loved clothing another chance to be worn.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="reveal section bg-cream text-brown dark:bg-slate-950 dark:text-cream">
+            <div class="mx-auto max-w-3xl">
+                <p class="mb-3 text-center font-bold uppercase tracking-[0.2em] text-caramel dark:text-caramel-light">Get in touch</p>
+                <h2 class="section-title text-center">Let's Find Your Style!</h2>
+                <p class="mb-10 text-center text-brown dark:text-slate-300">
+                    Have a question about an item or collection? Send us a message.
+                </p>
+
+                <form id="contactForm" action="#" class="space-y-5 rounded-2xl border border-beige bg-white p-6 text-brown shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-cream md:p-8">
+                    <div>
+                        <label for="name" class="mb-2 block font-bold">Name</label>
+                        <input class="form-input" type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+
+                    <div>
+                        <label for="email" class="mb-2 block font-bold">Email</label>
+                        <input class="form-input" type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div>
+                        <label for="message" class="mb-2 block font-bold">Message</label>
+                        <textarea class="form-input" id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+                    </div>
+
+                    <button class="primary-button w-full" type="submit">Send Message →</button>
+                    <p id="formNotice" class="text-sm text-caramel dark:text-caramel-light" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-brown px-6 py-8 text-center text-cream dark:bg-brown dark:text-cream">
+        <a href="#hero" class="text-xl font-black">UKAYUKAY THRIFT</a>
+        <p class="mt-2 text-sm text-stone-200">Affordable fashion. One-of-a-kind finds.</p>
+        <p class="mt-4 text-xs text-stone-200">&copy; 2026 Ukay-Ukay Thrift. All rights reserved.</p>
+    </footer>
+
+    <!-- Load order: GSAP, ScrollTrigger, then the page script. -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
