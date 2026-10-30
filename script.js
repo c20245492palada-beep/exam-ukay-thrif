@@ -2,10 +2,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ---- B1: DARK MODE TOGGLE ----
 const darkModeToggle = document.querySelector("#darkModeToggle");
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+    document.documentElement.classList.remove("dark");
+} else if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+}
+
+const isDarkMode = document.documentElement.classList.contains("dark");
+darkModeToggle.textContent = isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+darkModeToggle.setAttribute("aria-pressed", String(isDarkMode));
 
 darkModeToggle.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
 
+    localStorage.setItem("theme", isDark ? "dark" : "light");
     darkModeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
     darkModeToggle.setAttribute("aria-pressed", String(isDark));
 
